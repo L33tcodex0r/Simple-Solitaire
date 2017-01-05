@@ -119,20 +119,7 @@
                 android:onClick="menuClick"
                 android:src="@drawable/restart"/>
 
-            <FrameLayout
-                android:id="@+id/ad_container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageView
-                    android:id="@+id/ivMenuAd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-
-                    android:contentDescription=""
-                    android:onClick=""/>
-            </FrameLayout>
+            <!-- Ad Frame Layout here -->
 
             <ImageView
                 android:id="@+id/mainButtonSettings"
@@ -178,15 +165,7 @@
                 android:maxLines="1"
                 android:text="@string/menu_restart"/>
 
-            <TextView
-                android:id="@+id/tvAdTitle"
-                style="@android:style/TextAppearance.Small"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:maxLines="3"
-                android:text=""/>
+           <!-- Ad title here -->
 
             <TextView
                 style="@android:style/TextAppearance.Small"

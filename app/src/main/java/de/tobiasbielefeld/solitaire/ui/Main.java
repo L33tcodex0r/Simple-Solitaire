@@ -127,35 +127,7 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
     }
 
     private void getAd(){
-
-        nativeAd = new NativeAd(this, "YOUR_PLACEMENT_ID");
-        nativeAd.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                ImageView ivMenuAd = (ImageView) findViewById(R.id.ivMenuAd);
-                NativeAd.downloadAndDisplayImage(nativeAd.getAdCoverImage(),ivMenuAd);
-                nativeAd.registerViewForInteraction(ivMenuAd);
-
-                TextView tvAdTitle = (TextView) findViewById(R.id.tvAdTitle);
-                tvAdTitle.setText(nativeAd.getAdTitle());
-                AdChoicesView adChoicesView = new AdChoicesView(Main.this,nativeAd,true);
-                FrameLayout adContainer = (FrameLayout) findViewById(R.id.ad_container);
-                adContainer.addView(adChoicesView);
-
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-
-            }
-        });
-
-        nativeAd.loadAd();
+    // TODO Add code to grab a native ad.
     }
 
     @Override
