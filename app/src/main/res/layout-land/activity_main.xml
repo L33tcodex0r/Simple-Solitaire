@@ -2,6 +2,7 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -124,9 +125,9 @@
                 android:id="@+id/ivMenuAd"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-
                 android:contentDescription=""
-                android:onClick=""/>
+                app:srcCompat="@mipmap/ic_launcher"
+                android:layout_gravity="center_vertical"/>
         </FrameLayout>
         <TextView
             android:id="@+id/tvAdTitle"
@@ -135,9 +136,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:maxLines="3"
-            android:text=""
-            android:visibility="gone"/>
+            android:maxLines="2"
+            android:visibility="gone"
+            android:ellipsize="end"/>
 
 
         <ImageView

@@ -2,6 +2,7 @@
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -74,15 +75,15 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:background="#e7e7e7"
         android:baselineAligned="false"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="5dp"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,15 +124,17 @@
                 android:id="@+id/ad_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                >
 
                 <ImageView
                     android:id="@+id/ivMenuAd"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-
+                    android:transitionName="@string/shared_native_media_view"
                     android:contentDescription=""
-                    android:onClick=""/>
+                    app:srcCompat="@mipmap/ic_launcher"
+                    android:layout_gravity="center_horizontal"/>
             </FrameLayout>
 
             <ImageView
@@ -181,12 +184,15 @@
             <TextView
                 android:id="@+id/tvAdTitle"
                 style="@android:style/TextAppearance.Small"
+                android:transitionName="@string/shared_native_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:maxLines="3"
-                android:text=""/>
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:text="Test"
+                android:textSize="10sp"
+                android:textAlignment="center"/>
 
             <TextView
                 style="@android:style/TextAppearance.Small"

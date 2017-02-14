@@ -76,4 +76,16 @@
     <string name="about_description">Show information about the game like licenses and changelog</string>
     <string name="pref_key_about" translatable="false">pref_key_about</string>
 
+    <!-- Facebook -->
+    <string name="facebook_app_id">1827858704164319</string>
+    <!-- Audience Network -->
+    <string name="menu_button_native_placement_id">1827858704164319_1827860804164109</string>
+    <string name="high_score_native_placement_id">1827858704164319_1830879687195554</string>
+
+    <string name="shared_native_icon">native_icon</string>
+    <string name="shared_native_media_view">native_media_view</string>
+    <string name="shared_native_title">native_title</string>
+    <string name="shared_native_ad_choice">native_ad_choice</string>
+    <string name="shared_native_cta">native_cta</string>
+
 </resources>

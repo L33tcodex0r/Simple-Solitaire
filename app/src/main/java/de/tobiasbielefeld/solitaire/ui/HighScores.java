@@ -23,18 +23,35 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdChoicesView;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.MediaView;
+import com.facebook.ads.NativeAd;
+import com.facebook.appevents.AppEventsLogger;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import de.tobiasbielefeld.solitaire.R;
@@ -55,10 +72,23 @@ public class HighScores extends AppCompatActivity {
     private TextView text1;
     private LinearLayout layoutScores;
 
+    private NativeAd nativeAd;
+    private LinearLayout nativeAdContainer;
+    private LinearLayout adView;
+
+    private AppEventsLogger appEventsLogger;
+
+    public static String EVENT_AD_LOADED = "ad_loaded";
+    public static String EVENT_AD_CLICKED = "ad_clicked";
+
+    public static String TAG_ADS = "tag_high_scroe_ads";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);                                                         //initialize stuff
         setContentView(R.layout.activity_high_scores);
+
+        appEventsLogger = AppEventsLogger.newLogger(this);
 
         ActionBar actionBar = getSupportActionBar();
         layoutScores = (LinearLayout) findViewById(R.id.highScoresLinearLayout1);                   //load the layouts and textView
@@ -107,6 +137,8 @@ public class HighScores extends AppCompatActivity {
             linearLayout2.addView(textView2);
             layoutScores.addView(linearLayout2);                                                    //and finally add the new entry layout to the scores layout
         }
+
+        getAd();
     }
 
     @Override
@@ -171,5 +203,85 @@ public class HighScores extends AppCompatActivity {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
                 break;
         }
+    }
+
+    private void getAd(){
+
+        // nativeAd = new NativeAd(this, "YOUR_PLACEMENT_ID");
+        nativeAd = new NativeAd(this, getString(R.string.high_score_native_placement_id));
+        nativeAd.setAdListener(new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                Log.e(TAG_ADS, "Load error! " + adError.getErrorCode() + ":" +
+                        adError.getErrorMessage());
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                Log.d(TAG_ADS, "Ad loaded!");
+
+                nativeAdContainer = (LinearLayout)findViewById(R.id.native_ad_container);
+                LayoutInflater inflater = LayoutInflater.from(HighScores.this);
+
+                adView = (LinearLayout)inflater.inflate(R.layout.high_score_native_ad, nativeAdContainer, false);
+                nativeAdContainer.addView(adView);
+
+                // Create native UI using the ad metadata.
+                ImageView nativeAdIcon = (ImageView) adView.findViewById(R.id.native_ad_icon);
+                TextView nativeAdTitle = (TextView) adView.findViewById(R.id.native_ad_title);
+                final MediaView nativeAdMedia = (MediaView) adView.findViewById(R.id.native_ad_media);
+                TextView nativeAdSocialContext = (TextView) adView.findViewById(R.id.native_ad_social_context);
+                TextView nativeAdBody = (TextView) adView.findViewById(R.id.native_ad_body);
+                Button nativeAdCallToAction = (Button) adView.findViewById(R.id.native_ad_call_to_action);
+
+                // Set the Text.
+                nativeAdTitle.setText(nativeAd.getAdTitle());
+                nativeAdSocialContext.setText(nativeAd.getAdSocialContext());
+                nativeAdBody.setText(nativeAd.getAdBody());
+                nativeAdCallToAction.setText(nativeAd.getAdCallToAction());
+
+                // Download and display the ad icon.
+                NativeAd.Image adIcon = nativeAd.getAdIcon();
+                NativeAd.downloadAndDisplayImage(adIcon, nativeAdIcon);
+
+                // Download and display the cover image.
+                nativeAdMedia.setNativeAd(nativeAd);
+
+                final View parent = (View) nativeAdMedia.getParent();
+                parent.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Rect r = new Rect();
+                        nativeAdMedia.getHitRect(r);
+                        r.top += 50;
+                        r.bottom -= 50;
+                        parent.setTouchDelegate(new TouchDelegate(r, nativeAdMedia));
+                    }
+                });
+
+
+                // Add the AdChoices icon
+                LinearLayout adChoicesContainer = (LinearLayout) findViewById(R.id.ad_choices_container);
+                AdChoicesView adChoicesView = new AdChoicesView(HighScores.this, nativeAd, true);
+                adChoicesContainer.addView(adChoicesView);
+
+                // Register the Title and CTA button to listen for clicks.
+                List<View> clickableViews = new ArrayList<>();
+                clickableViews.add(nativeAdTitle);
+                clickableViews.add(nativeAdCallToAction);
+                clickableViews.add(nativeAdMedia);
+                nativeAd.registerViewForInteraction(nativeAdContainer,clickableViews);
+
+                appEventsLogger.logEvent(EVENT_AD_LOADED);
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                Log.d(TAG_ADS, "Ad clicked!");
+                appEventsLogger.logEvent(EVENT_AD_CLICKED);
+            }
+        });
+
+        nativeAd.loadAd();
     }
 }

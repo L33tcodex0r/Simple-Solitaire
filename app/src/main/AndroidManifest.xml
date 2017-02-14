@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.tobiasbielefeld.solitaire">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:fullBackupContent="@xml/my_backup_rules"
@@ -10,11 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeMain">
         <activity
-            android:name=".ui.Main">
+            android:name=".ui.SplashScreen"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.FullScreenNative"
+            android:noHistory="true">
+
+        </activity>
+        <activity
+            android:name=".ui.Main">
+
         </activity>
         <activity
             android:name=".ui.About"
@@ -28,6 +40,9 @@
             android:name=".ui.Settings"
             android:theme="@style/AppThemeOther"
             android:label="@string/title_activity_settings"/>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+
     </application>
 
 </manifest>

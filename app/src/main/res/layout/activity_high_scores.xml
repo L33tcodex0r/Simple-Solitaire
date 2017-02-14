@@ -20,9 +20,10 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
     <ScrollView
+        android:id="@+id/high_score_scroll"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -30,16 +31,27 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="de.tobiasbielefeld.solitaire.activity_about"
-        android:layout_above="@+id/highScoresButtonDelete"
-        android:layout_below="@+id/highScoresTextViewGamesWon">
-
+        android:layout_below="@+id/highScoresTextViewGamesWon"
+        android:layout_above="@+id/highScoresButtonDelete">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/highScoresLinearLayout1"
-            android:padding="10dp">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/native_ad_container"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/highScoresLinearLayout1"
+                android:padding="10dp"/>
 
         </LinearLayout>
     </ScrollView>

@@ -21,26 +21,36 @@ package de.tobiasbielefeld.solitaire.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Transition;
+import android.transition.TransitionValues;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.facebook.FacebookSdk;
+import com.facebook.ads.AdSettings;
+import com.facebook.ads.MediaView;
+import com.facebook.appevents.AppEventsLogger;
 
 import com.facebook.ads.Ad;
 import com.facebook.ads.AdChoicesView;
@@ -51,6 +61,7 @@ import com.facebook.ads.NativeAd;
 import de.tobiasbielefeld.solitaire.R;
 import de.tobiasbielefeld.solitaire.classes.Card;
 import de.tobiasbielefeld.solitaire.classes.Stack;
+import de.tobiasbielefeld.solitaire.dialogs.RestartDialog;
 
 import static de.tobiasbielefeld.solitaire.SharedData.*;
 
@@ -59,7 +70,8 @@ import static de.tobiasbielefeld.solitaire.SharedData.*;
  * touch events and menu clicks are also handled here
  */
 
-public class Main extends AppCompatActivity implements View.OnTouchListener {
+public class Main extends AppCompatActivity
+        implements View.OnTouchListener, RestartDialog.RestartDialogListener {
 
     private long backPressedTime;
 
@@ -69,16 +81,35 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
     public RelativeLayout layoutGame;                                                               //contains the game stacks and cards
     NativeAd nativeAd;
 
+    private AppEventsLogger appEventsLogger;
+
+    public static String TAG_ADS = "tag_ads";
+
+    public static String EVENT_AD_LOADED = "ad_loaded";
+    public static String EVENT_AD_CLICKED = "ad_clicked";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);                                                         //initialize stuff
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().getSharedElementEnterTransition()
+                    .setDuration(750)
+                    .setInterpolator(new DecelerateInterpolator());
+        }
+
+        FacebookSdk.sdkInitialize(this);
+        AppEventsLogger.activateApp(this);
+
+        appEventsLogger = AppEventsLogger.newLogger(this);
 
         mainActivity = this;
         layoutGame = (RelativeLayout) findViewById(R.id.mainRelativeLayoutGame);                    //set layout
         mainTextViewTime = (TextView) findViewById(R.id.mainTextViewTime);
         mainTextViewScore = (TextView) findViewById(R.id.mainTextViewScore);
         buttonAutoComplete = (Button) findViewById(R.id.buttonMainAutoComplete);
+
         savedData = PreferenceManager.getDefaultSharedPreferences(this);                            //get the shared pref
         editor = savedData.edit();                                                                  //and an editor, otherwise using savedData.edit() would cause problems when loading data
         editor.apply();
@@ -128,34 +159,21 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
 
     private void getAd(){
 
-        nativeAd = new NativeAd(this, "YOUR_PLACEMENT_ID");
-        nativeAd.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
+        // Get the same ad loaded for the full screen native ad
+        nativeAd = NativeAdLoader.getInstance().getNativeAd();
+        if (nativeAd != null) {
+            ImageView ivMenuAd = (ImageView) findViewById(R.id.ivMenuAd);
+            NativeAd.downloadAndDisplayImage(nativeAd.getAdCoverImage(), ivMenuAd);
+            nativeAd.registerViewForInteraction(ivMenuAd);
 
-            }
+            TextView tvAdTitle = (TextView) findViewById(R.id.tvAdTitle);
+            tvAdTitle.setText(nativeAd.getAdTitle());
+            Log.d(TAG_ADS, "Title: " + nativeAd.getAdTitle());
 
-            @Override
-            public void onAdLoaded(Ad ad) {
-                ImageView ivMenuAd = (ImageView) findViewById(R.id.ivMenuAd);
-                NativeAd.downloadAndDisplayImage(nativeAd.getAdCoverImage(),ivMenuAd);
-                nativeAd.registerViewForInteraction(ivMenuAd);
-
-                TextView tvAdTitle = (TextView) findViewById(R.id.tvAdTitle);
-                tvAdTitle.setText(nativeAd.getAdTitle());
-                AdChoicesView adChoicesView = new AdChoicesView(Main.this,nativeAd,true);
-                FrameLayout adContainer = (FrameLayout) findViewById(R.id.ad_container);
-                adContainer.addView(adChoicesView);
-
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-
-            }
-        });
-
-        nativeAd.loadAd();
+            AdChoicesView adChoicesView = new AdChoicesView(Main.this,nativeAd,true);
+            FrameLayout adContainer = (FrameLayout) findViewById(R.id.ad_container);
+            adContainer.addView(adChoicesView);
+        }
     }
 
     @Override
@@ -181,12 +199,17 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         long BACK_PRESSED_TIME_DELTA = 2000;
 
         if (keyCode == KeyEvent.KEYCODE_BACK                                                        //if it was the back key and this feature is still activated in the Settings,
-                && savedData.getBoolean(getString(R.string.pref_key_confirm_closing_game), true)
-                && (System.currentTimeMillis() - backPressedTime > BACK_PRESSED_TIME_DELTA)) {      //and the delta to the last time pressed button is over the max time
+                && savedData.getBoolean(getString(R.string.pref_key_confirm_closing_game), true)) {
 
-            showToast(getString(R.string.game_press_again));                                        //show toast to press again
-            backPressedTime = System.currentTimeMillis();                                           //and save the time as pressed
-            return true;                                                                            //don't exit the game
+            if (System.currentTimeMillis() - backPressedTime > BACK_PRESSED_TIME_DELTA) {          //and the delta to the last time pressed button is over the max time)
+                showToast(getString(R.string.game_press_again));                                        //show toast to press again
+                backPressedTime = System.currentTimeMillis();                                           //and save the time as pressed
+                return true;                                                                            //don't exit the game
+            } else {
+                // Exit
+                finish();
+                overridePendingTransition(0, 0);
+            }
         }
 
         return super.onKeyDown(keyCode, event);                                                     //if the time delta is smaller than the max time, close game
@@ -368,26 +391,20 @@ public class Main extends AppCompatActivity implements View.OnTouchListener {
         Stack.sSpacingMaxHeight = (int) ((layoutGame.getHeight() - stacks[0].mView.getY()));        //set a max height, so the cards won't go over the screen size
     }
 
-    public static class RestartDialog extends DialogFragment {
-        @Override
-        @NonNull
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-            builder.setTitle(R.string.app_name)
-                    .setItems(R.array.restart_menu, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // "which" argument contains index of selected item. 0 is new game, 1 is re-deal
-                            game.newGame(which);
-                        }
-                    })
-                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            //just cancel
-                        }
-                    });
 
-            return builder.create();
+    public void onFinishedRestartDialog(int result) {
+        switch (result) {
+            case RestartDialog.NEW_GAME:
+                game.newGame(RestartDialog.NEW_GAME);
+                getAd();
+                break;
+            case RestartDialog.RE_DEAL:
+                game.newGame(RestartDialog.RE_DEAL);
+                getAd();
+                break;
+            // case RestartDialog.CANCEL:
+            // break;
         }
     }
 
