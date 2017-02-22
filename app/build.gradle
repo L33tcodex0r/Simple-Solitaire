@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
     defaultConfig {
         buildConfigField "long", "TIMESTAMP", System.currentTimeMillis() + "L"
-        applicationId "de.tobiasbielefeld.solitaire"
+        applicationId "com.sample.solitaire"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 11
