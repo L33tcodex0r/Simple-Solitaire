@@ -16,16 +16,16 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.helper;
+package com.sample.solitaire.helper;
 
 import android.os.Handler;
 import android.os.Message;
 
 import java.util.Locale;
 
-import de.tobiasbielefeld.solitaire.R;
+import com.sample.solitaire.R;
 
-import static de.tobiasbielefeld.solitaire.SharedData.*;
+import static com.sample.solitaire.SharedData.*;
 
 /*
  *  Handles the timer, updates, saves and load the current time of playing

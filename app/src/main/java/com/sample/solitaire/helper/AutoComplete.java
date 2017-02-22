@@ -16,17 +16,17 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.helper;
+package com.sample.solitaire.helper;
 
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
 
-import de.tobiasbielefeld.solitaire.classes.Stack;
+import com.sample.solitaire.classes.Stack;
 
-import static de.tobiasbielefeld.solitaire.SharedData.*;
-import static de.tobiasbielefeld.solitaire.helper.MovingCards.*;
+import static com.sample.solitaire.SharedData.*;
+import static com.sample.solitaire.helper.MovingCards.*;
 
 /*
  *  if the last card on the tableau is flipped up, the auto complete can be run. it simply test

@@ -17,7 +17,7 @@
  */
 
 
-package de.tobiasbielefeld.solitaire.ui;
+package com.sample.solitaire.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,10 +31,10 @@ import android.view.WindowManager;
 
 import java.util.Locale;
 
-import de.tobiasbielefeld.solitaire.R;
-import de.tobiasbielefeld.solitaire.classes.Card;
+import com.sample.solitaire.R;
+import com.sample.solitaire.classes.Card;
 
-import static de.tobiasbielefeld.solitaire.SharedData.*;
+import static com.sample.solitaire.SharedData.*;
 
 /*
  * Settings activity created from "New Settings Activity" Tool from Android Studio.

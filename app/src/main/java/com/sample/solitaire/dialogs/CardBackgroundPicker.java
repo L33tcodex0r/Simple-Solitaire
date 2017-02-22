@@ -16,17 +16,17 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.dialogs;
+package com.sample.solitaire.dialogs;
 
 import android.content.Context;
 import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
 
-import de.tobiasbielefeld.solitaire.R;
-import de.tobiasbielefeld.solitaire.classes.Card;
+import com.sample.solitaire.R;
+import com.sample.solitaire.classes.Card;
 
-import static de.tobiasbielefeld.solitaire.SharedData.editor;
+import static com.sample.solitaire.SharedData.editor;
 
 /*
  * dialog for picking the card background drawable. Clicks on it are handled here and the

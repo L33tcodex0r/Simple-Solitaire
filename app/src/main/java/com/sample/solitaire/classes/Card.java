@@ -16,15 +16,15 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.classes;
+package com.sample.solitaire.classes;
 
 import android.graphics.PointF;
 import android.widget.LinearLayout;
 
-import de.tobiasbielefeld.solitaire.R;
+import com.sample.solitaire.R;
 
-import static de.tobiasbielefeld.solitaire.SharedData.*;
-import static de.tobiasbielefeld.solitaire.helper.CardDrawables.*;
+import static com.sample.solitaire.SharedData.*;
+import static com.sample.solitaire.helper.CardDrawables.*;
 
 /*
  *  Contains everything related to cards. it uses a picture view for drawable,

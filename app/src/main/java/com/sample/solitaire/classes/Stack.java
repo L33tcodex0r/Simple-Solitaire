@@ -16,21 +16,20 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.classes;
+package com.sample.solitaire.classes;
 
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import static de.tobiasbielefeld.solitaire.SharedData.OPTION_NO_RECORD;
-import static de.tobiasbielefeld.solitaire.SharedData.cards;
-import static de.tobiasbielefeld.solitaire.SharedData.editor;
-import static de.tobiasbielefeld.solitaire.SharedData.moveToStack;
-import static de.tobiasbielefeld.solitaire.SharedData.recordList;
-import static de.tobiasbielefeld.solitaire.SharedData.savedData;
-import static de.tobiasbielefeld.solitaire.SharedData.scores;
-import static de.tobiasbielefeld.solitaire.SharedData.stacks;
+import static com.sample.solitaire.SharedData.OPTION_NO_RECORD;
+import static com.sample.solitaire.SharedData.cards;
+import static com.sample.solitaire.SharedData.editor;
+import static com.sample.solitaire.SharedData.moveToStack;
+import static com.sample.solitaire.SharedData.recordList;
+import static com.sample.solitaire.SharedData.savedData;
+import static com.sample.solitaire.SharedData.scores;
+import static com.sample.solitaire.SharedData.stacks;
 
 /*
  *  Contains everything around a stack

@@ -16,9 +16,9 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.helper;
+package com.sample.solitaire.helper;
 
-import de.tobiasbielefeld.solitaire.*;
+import com.sample.solitaire.R;
 
 /*
  *  I put the drawable arrays in a extra file so the Card.java remains more clearly.

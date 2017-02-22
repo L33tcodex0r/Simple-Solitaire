@@ -16,15 +16,15 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.helper;
+package com.sample.solitaire.helper;
 
 import java.util.ArrayList;
 
-import de.tobiasbielefeld.solitaire.R;
-import de.tobiasbielefeld.solitaire.classes.Card;
-import de.tobiasbielefeld.solitaire.classes.Stack;
+import com.sample.solitaire.R;
+import com.sample.solitaire.classes.Card;
+import com.sample.solitaire.classes.Stack;
 
-import static de.tobiasbielefeld.solitaire.SharedData.*;
+import static com.sample.solitaire.SharedData.*;
 
 /*
  *  Handles scoring. It has two functions which tests movements and update the score.

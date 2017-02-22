@@ -16,15 +16,15 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.helper;
+package com.sample.solitaire.helper;
 
 import java.util.ArrayList;
 
-import de.tobiasbielefeld.solitaire.classes.Card;
-import de.tobiasbielefeld.solitaire.classes.Stack;
+import com.sample.solitaire.classes.Card;
+import com.sample.solitaire.classes.Stack;
 
 
-import static de.tobiasbielefeld.solitaire.SharedData.*;
+import static com.sample.solitaire.SharedData.*;
 
 /*
  *  Handles the input of cards to move around. When a card was touched, it adds all cards

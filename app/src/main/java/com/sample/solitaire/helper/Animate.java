@@ -16,7 +16,7 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.helper;
+package com.sample.solitaire.helper;
 
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
@@ -26,11 +26,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 
-import de.tobiasbielefeld.solitaire.R;
-import de.tobiasbielefeld.solitaire.classes.Card;
-import de.tobiasbielefeld.solitaire.classes.Stack;
+import com.sample.solitaire.R;
+import com.sample.solitaire.classes.Card;
+import com.sample.solitaire.classes.Stack;
 
-import static de.tobiasbielefeld.solitaire.SharedData.*;
+import static com.sample.solitaire.SharedData.*;
 
 /*
  * class for all card animations. Like moving cards and fading them out and in for hints.

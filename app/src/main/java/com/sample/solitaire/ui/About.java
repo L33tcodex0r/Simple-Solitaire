@@ -16,7 +16,7 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.ui;
+package com.sample.solitaire.ui;
 
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
@@ -37,10 +37,10 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import de.tobiasbielefeld.solitaire.BuildConfig;
-import de.tobiasbielefeld.solitaire.R;
+import com.sample.solitaire.BuildConfig;
+import com.sample.solitaire.R;
 
-import static de.tobiasbielefeld.solitaire.SharedData.savedData;
+import static com.sample.solitaire.SharedData.savedData;
 
 /**
  * About activity, shows my information in a tab view with a changelog

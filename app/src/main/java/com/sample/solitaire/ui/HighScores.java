@@ -17,7 +17,7 @@
  */
 
 
-package de.tobiasbielefeld.solitaire.ui;
+package com.sample.solitaire.ui;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -37,13 +37,13 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-import de.tobiasbielefeld.solitaire.R;
-import de.tobiasbielefeld.solitaire.helper.Scores;
+import com.sample.solitaire.R;
+import com.sample.solitaire.helper.Scores;
 
-import static de.tobiasbielefeld.solitaire.SharedData.game;
-import static de.tobiasbielefeld.solitaire.SharedData.savedData;
-import static de.tobiasbielefeld.solitaire.SharedData.scores;
-import static de.tobiasbielefeld.solitaire.SharedData.showToast;
+import static com.sample.solitaire.SharedData.game;
+import static com.sample.solitaire.SharedData.savedData;
+import static com.sample.solitaire.SharedData.scores;
+import static com.sample.solitaire.SharedData.showToast;
 
 /**
  * this activity shows the high scores. The entries are generated in onCreate and shown

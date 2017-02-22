@@ -16,24 +16,24 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire;
+package com.sample.solitaire;
 
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import de.tobiasbielefeld.solitaire.ui.Main;
-import de.tobiasbielefeld.solitaire.classes.Card;
-import de.tobiasbielefeld.solitaire.classes.Stack;
-import de.tobiasbielefeld.solitaire.helper.Animate;
-import de.tobiasbielefeld.solitaire.helper.AutoComplete;
-import de.tobiasbielefeld.solitaire.helper.Game;
-import de.tobiasbielefeld.solitaire.helper.Hint;
-import de.tobiasbielefeld.solitaire.helper.MovingCards;
-import de.tobiasbielefeld.solitaire.helper.RecordList;
-import de.tobiasbielefeld.solitaire.helper.Scores;
-import de.tobiasbielefeld.solitaire.helper.Timer;
+import com.sample.solitaire.ui.Main;
+import com.sample.solitaire.classes.Card;
+import com.sample.solitaire.classes.Stack;
+import com.sample.solitaire.helper.Animate;
+import com.sample.solitaire.helper.AutoComplete;
+import com.sample.solitaire.helper.Game;
+import com.sample.solitaire.helper.Hint;
+import com.sample.solitaire.helper.MovingCards;
+import com.sample.solitaire.helper.RecordList;
+import com.sample.solitaire.helper.Scores;
+import com.sample.solitaire.helper.Timer;
 
 /*
  * static data which is shared across the whole project, i like this more than passing stuff around

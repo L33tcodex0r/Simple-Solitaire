@@ -14,14 +14,14 @@
             android:title="@string/settings_background_clour"
             android:summary="%s"/>
 
-        <de.tobiasbielefeld.solitaire.dialogs.CardPicker
+        <com.sample.solitaire.dialogs.CardPicker
             android:key="@string/pref_key_cards"
             android:title="@string/settings_cards"
             android:negativeButtonText="@string/cancel"
             android:positiveButtonText="@null"
             android:summary=""/>
 
-        <de.tobiasbielefeld.solitaire.dialogs.CardBackgroundPicker
+        <com.sample.solitaire.dialogs.CardBackgroundPicker
             android:key="@string/pref_key_cards_background"
             android:title="@string/settings_cards_back"
             android:negativeButtonText="@string/cancel"

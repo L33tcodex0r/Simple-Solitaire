@@ -1,4 +1,4 @@
-package de.tobiasbielefeld.solitaire.ui;
+package com.sample.solitaire.ui;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

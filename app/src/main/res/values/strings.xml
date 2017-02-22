@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Simple Solitaire</string>
+    <string name="app_name" translatable="false">Solitaire NativeAd Sample</string>
     <string name="app_version" translatable="false">Version</string>
 
     <string name="cancel">Cancel</string>

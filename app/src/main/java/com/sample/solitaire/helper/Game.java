@@ -16,19 +16,19 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.helper;
+package com.sample.solitaire.helper;
 
 import android.util.Log;
 import android.view.View;
 
 import java.util.Random;
 
-import de.tobiasbielefeld.solitaire.R;
-import de.tobiasbielefeld.solitaire.classes.Card;
-import de.tobiasbielefeld.solitaire.classes.Stack;
+import com.sample.solitaire.R;
+import com.sample.solitaire.classes.Card;
+import com.sample.solitaire.classes.Stack;
 
-import static de.tobiasbielefeld.solitaire.SharedData.*;
-import static de.tobiasbielefeld.solitaire.helper.MovingCards.AUTO_COMPLETE_SHOWN;
+import static com.sample.solitaire.SharedData.*;
+import static com.sample.solitaire.helper.MovingCards.AUTO_COMPLETE_SHOWN;
 
 /*
  *  Contains the load and save functions of the current game and also some stuff

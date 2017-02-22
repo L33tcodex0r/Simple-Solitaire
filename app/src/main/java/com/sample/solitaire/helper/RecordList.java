@@ -16,20 +16,20 @@
  * If you want to contact me, send me an e-mail at tobias.bielefeld@gmail.com
  */
 
-package de.tobiasbielefeld.solitaire.helper;
+package com.sample.solitaire.helper;
 
 import java.util.ArrayList;
 
-import de.tobiasbielefeld.solitaire.classes.Card;
-import de.tobiasbielefeld.solitaire.classes.Stack;
+import com.sample.solitaire.classes.Card;
+import com.sample.solitaire.classes.Stack;
 
-import static de.tobiasbielefeld.solitaire.SharedData.OPTION_UNDO;
-import static de.tobiasbielefeld.solitaire.SharedData.cards;
-import static de.tobiasbielefeld.solitaire.SharedData.editor;
-import static de.tobiasbielefeld.solitaire.SharedData.moveToStack;
-import static de.tobiasbielefeld.solitaire.SharedData.savedData;
-import static de.tobiasbielefeld.solitaire.SharedData.scores;
-import static de.tobiasbielefeld.solitaire.SharedData.stacks;
+import static com.sample.solitaire.SharedData.OPTION_UNDO;
+import static com.sample.solitaire.SharedData.cards;
+import static com.sample.solitaire.SharedData.editor;
+import static com.sample.solitaire.SharedData.moveToStack;
+import static com.sample.solitaire.SharedData.savedData;
+import static com.sample.solitaire.SharedData.scores;
+import static com.sample.solitaire.SharedData.stacks;
 
 /*
  *  Manages the records, so the player can undo movements. for that it has an entry subclass
